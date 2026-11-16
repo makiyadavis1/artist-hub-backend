@@ -1,5 +1,6 @@
 from flask import Flask
 from dotenv import load_dotenv
+from artist_hub.health import health
 
 load_dotenv()
 
@@ -19,11 +20,16 @@ config_map = {
 
 def create_app(config_name="dev"):
     app = Flask(__name__)
+
     app.config.from_object(config_map[config_name])
     
     print("DB URI:", app.config["SQLALCHEMY_DATABASE_URI"])
     print("JWT:", app.config["JWT_SECRET_KEY"])
+
+
     db.init_app(app)
     migrate.init_app(app, db)
+    
+    app.register_blueprint(health)
 
     return app
