@@ -1,6 +1,8 @@
 from flask import Flask
 from dotenv import load_dotenv
 from artist_hub.health import health
+from artist_hub import models
+from artist_hub.routes import main
 
 load_dotenv()
 
@@ -29,7 +31,8 @@ def create_app(config_name="dev"):
 
     db.init_app(app)
     migrate.init_app(app, db)
-    
+
     app.register_blueprint(health)
+    app.register_blueprint(main)
 
     return app
