@@ -17,6 +17,11 @@ class User(db.Model):
         db.String(255),
         nullable=False
     )
+    role = db.Column(
+    db.String(50),
+    nullable=False,
+    default="artist"
+    )
 
     created_at = db.Column(
         db.DateTime(timezone=True),

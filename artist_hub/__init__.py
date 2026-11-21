@@ -25,9 +25,8 @@ def create_app(config_name="dev"):
 
     app.config.from_object(config_map[config_name])
     
-    print("DB URI:", app.config["SQLALCHEMY_DATABASE_URI"])
-    print("JWT:", app.config["JWT_SECRET_KEY"])
-
+    
+    
 
     db.init_app(app)
     migrate.init_app(app, db)
